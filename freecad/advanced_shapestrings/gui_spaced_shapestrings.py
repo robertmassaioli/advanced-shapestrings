@@ -50,7 +50,8 @@ import draftguitools.gui_base_original as gui_base_original
 import draftguitools.gui_tool_utils as gui_tool_utils
 import draftutils.todo as todo
 
-from freecad.advanced_shapestrings.task_spacedshapestring import SpacedShapeStringTaskPanelCmd
+from .paths import get_icon_path
+from .task_spacedshapestring import SpacedShapeStringTaskPanelCmd
 from draftutils.translate import translate
 from draftutils.messages import _toolmsg, _err
 
@@ -64,7 +65,7 @@ class SpacedShapeString:
     def GetResources(self):
         """Set icon, menu and tooltip."""
         d = {
-            'Pixmap': 'Draft_SpacedShapeString',
+            'Pixmap': get_icon_path("Draft_SpacedShapeString.svg"),
             'MenuText': QT_TRANSLATE_NOOP(
                 "Draft_SpacedShapeString",
                 "Spaced shape from text"
