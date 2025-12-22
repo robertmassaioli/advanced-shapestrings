@@ -144,14 +144,36 @@ Uncheck to use working plane coordinate system</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="0">
+
+     <!-- New horizontal layout with Add/Remove buttons -->
+     <item row="1" column="1">
+      <layout class="QHBoxLayout" name="layoutStringButtons">
+       <item>
+        <widget class="QPushButton" name="pbAddString">
+         <property name="text">
+          <string>Add</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pbRemoveString">
+         <property name="text">
+          <string>Remove</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <!-- End new buttons -->
+
+     <item row="2" column="0">
       <widget class="QLabel" name="labelOffset">
        <property name="text">
         <string>Offset</string>
        </property>
       </widget>
      </item>
-     <item row="1" column="1">
+     <item row="2" column="1">
       <widget class="Gui::QuantitySpinBox" name="sbOffset">
        <property name="toolTip">
         <string>Spacing offset between strings</string>
@@ -167,7 +189,7 @@ Uncheck to use working plane coordinate system</string>
        </property>
       </widget>
      </item>
-     <item row="2" column="0" colspan="2">
+     <item row="3" column="0" colspan="2">
       <widget class="QCheckBox" name="cbUseBoundingBox">
        <property name="toolTip">
         <string>Use string bounding box width + offset for spacing</string>
@@ -177,14 +199,14 @@ Uncheck to use working plane coordinate system</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="0">
+     <item row="4" column="0">
       <widget class="QLabel" name="labelFontFile">
        <property name="text">
         <string>Font file</string>
        </property>
       </widget>
      </item>
-     <item row="3" column="1">
+     <item row="4" column="1">
       <widget class="Gui::FileChooser" name="fcFontFile">
        <property name="filter">
         <string>Font files (*.ttc *.ttf *.otf *.pfb *.TTC *.TTF *.OTF *.PFB)</string>

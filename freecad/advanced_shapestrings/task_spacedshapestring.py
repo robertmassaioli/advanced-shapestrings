@@ -127,6 +127,18 @@ class SpacedShapeStringTaskPanel:
             self.resetPoint,
         )
 
+        # New: connect Add/Remove buttons
+        QtCore.QObject.connect(
+            self.form.pbAddString,
+            QtCore.SIGNAL("clicked()"),
+            self.addStringItem,
+        )
+        QtCore.QObject.connect(
+            self.form.pbRemoveString,
+            QtCore.SIGNAL("clicked()"),
+            self.removeStringItem,
+        )
+
     def fileSelect(self, fn):
         """Assign the selected file."""
         self.fileSpec = fn
@@ -136,6 +148,45 @@ class SpacedShapeStringTaskPanel:
         self.pointPicked = False
         origin = App.Vector(0.0, 0.0, 0.0)
         self.setPoint(origin)
+
+    def _createEditableItem(self, text):
+        """Create an editable QListWidgetItem with the given text."""
+        item = QtGui.QListWidgetItem(text)
+        item.setFlags(item.flags() | QtCore.Qt.ItemIsEditable)
+        return item
+
+    def addStringItem(self):
+        """Add a new editable entry to listStrings."""
+        list_widget = self.form.listStrings
+        # Use a simple translated default label, user can edit after
+        item = self._createEditableItem(translate("draft", "New string"))
+        list_widget.addItem(item)
+        # Optionally start editing the new item immediately
+        list_widget.setCurrentItem(item)
+        list_widget.editItem(item)
+        self.updateRemoveButtonState()
+
+    def removeStringItem(self):
+        """Remove the currently selected entry from listStrings if more than one."""
+        list_widget = self.form.listStrings
+        count = list_widget.count()
+        if count <= 1:
+            return  # Do not allow removing the last remaining item
+
+        current_row = list_widget.currentRow()
+        if current_row < 0:
+            # If nothing is selected, remove the last item
+            current_row = count - 1
+        item = list_widget.takeItem(current_row)
+        # Explicitly delete to avoid leaks in long sessions
+        del item
+        self.updateRemoveButtonState()
+
+    def updateRemoveButtonState(self):
+        """Enable/disable the Remove button depending on the number of items."""
+        list_widget = self.form.listStrings
+        can_remove = list_widget.count() > 1
+        self.form.pbRemoveString.setEnabled(can_remove)
 
     def action(self, arg):
         """Scene event handler."""
