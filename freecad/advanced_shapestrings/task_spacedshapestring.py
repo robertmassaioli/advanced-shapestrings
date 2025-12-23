@@ -30,6 +30,7 @@
 ## \addtogroup drafttaskpanels
 # @{
 
+import traceback
 import PySide.QtCore as QtCore
 import PySide.QtGui as QtGui
 
@@ -308,6 +309,8 @@ class SpacedShapeStringTaskPanelCmd(SpacedShapeStringTaskPanel):
             )
         except Exception:
             _err("Draft_SpacedShapeString: error delaying commit\n")
+            # Also print the full Python traceback to the console/log
+            traceback.print_exc()
 
 
 class SpacedShapeStringTaskPanelEdit(SpacedShapeStringTaskPanel):

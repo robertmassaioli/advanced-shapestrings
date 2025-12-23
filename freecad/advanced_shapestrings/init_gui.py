@@ -32,6 +32,14 @@ class AdvancedShapestrings(Gui.Workbench):
         """
 
         try:
+            ## Init so that we can use the draft tools
+            import DraftGui
+            import draftguitools.gui_snapper
+            if not hasattr(Gui,"draftToolBar"):
+                Gui.draftToolBar = DraftGui.DraftToolBar()    
+            if not hasattr(Gui,"Snapper"):
+                Gui.Snapper = draftguitools.gui_snapper.Snapper()
+
             from . import AdvancedShapestringTools
         except Exception as exc:
             App.Console.PrintError(exc)
