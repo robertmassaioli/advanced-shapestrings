@@ -28,7 +28,7 @@ import FreeCADGui as Gui
 
 from draftviewproviders.view_base import ViewProviderDraft
 from .task_spacedshapestring import SpacedShapeStringTaskPanelEdit
-
+from .paths import get_icon_path
 
 class ViewProviderSpacedShapeString(ViewProviderDraft):
 
@@ -36,7 +36,17 @@ class ViewProviderSpacedShapeString(ViewProviderDraft):
         vobj.Proxy = self
 
     def getIcon(self):
-        return ":/icons/Draft_SpacedShapeString.svg"
+        return get_icon_path("Draft_SpacedShapeString.svg")
+    
+    def updateData(self, obj, prop):
+        if (prop == "Strings" or
+            prop == "FontFile" or
+            prop == "Size" or
+            prop == "Offset" or
+            prop == "UseBoundingBox"):
+            obj.recompute()
+        
+        return
 
     def setEdit(self, vobj, mode):
         if mode != 0:

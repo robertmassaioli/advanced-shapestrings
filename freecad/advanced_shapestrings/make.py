@@ -80,6 +80,7 @@ def make_spacedshapestring(Strings, FontFile, Size=100, Offset=10, UseBoundingBo
         if "PointSize" in obrep.PropertiesList:
             obrep.PointSize = 1
         gui_utils.select(obj)
+        
     obj.recompute()
 
     App.Console.PrintMessage("SpacedShapeString object created successfully.\n")
