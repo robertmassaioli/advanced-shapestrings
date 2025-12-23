@@ -34,7 +34,7 @@ import FreeCAD as App
 import Part
 
 from draftgeoutils import faces
-from draftutils.messages import _wrn
+from draftutils.messages import _wrn, _msg, _toolmsg
 from draftutils.translate import translate
 
 from draftobjects.base import DraftObject
@@ -130,7 +130,7 @@ class SpacedShapeString(DraftObject):
         if obj.Strings and obj.FontFile:
             plm = obj.Placement
             all_shapes = []
-            x_offset = 0.0
+            x_offset = App.Units.Quantity(0, App.Units.Length)  # 0 mm
 
             # Pre-calculate justification vector once (same for all strings)
             # Create a test shape to get justification parameters
@@ -206,6 +206,9 @@ class SpacedShapeString(DraftObject):
                             shape.translate(offset_vec)
 
                     # Calculate spacing for next string if UseBoundingBox is enabled
+                    _toolmsg("type x_offset: {} repr: {}".format(type(x_offset), repr(x_offset)))
+                    _toolmsg("type obj.Offset: {} repr: {}".format(type(obj.Offset), repr(obj.Offset)))
+
                     if obj.UseBoundingBox:
                         string_compound = Part.Compound(shapes)
                         bbox = string_compound.optimalBoundingBox()
