@@ -71,6 +71,11 @@ class AdvancedShapestrings(Gui.Workbench):
         '''
         code which should be computed when this workbench is deactivated
         '''
+        if hasattr(Gui, "draftToolBar"):
+            Gui.draftToolBar.Deactivated()
+        if hasattr(Gui, "Snapper"):
+            Gui.Snapper.hide()
+        
         App.Console.PrintMessage(translate(
             "Log",
             "Workbench advanced_shapestrings de-activated.") + "\n")

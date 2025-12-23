@@ -86,9 +86,9 @@ class SpacedShapeString(gui_base_original.Creator):
             self.ui = Gui.draftToolBar
             self.sourceCmd = self
             self.task = SpacedShapeStringTaskPanelCmd(self)
-        self.call = self.view.addEventCallback("SoEvent", self.task.action)
-        _toolmsg(translate("draft", "Pick SpacedShapeString location point"))
-        todo.ToDo.delay(Gui.Control.showDialog, self.task)
+            self.call = self.view.addEventCallback("SoEvent", self.task.action)
+            _toolmsg(translate("draft", "Pick SpacedShapeString location point"))
+            todo.ToDo.delay(Gui.Control.showDialog, self.task)
 
     def finish(self):
         """Finalize the command and remove callbacks."""
