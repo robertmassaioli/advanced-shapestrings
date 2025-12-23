@@ -50,6 +50,8 @@ from .paths import get_icon_path, get_ui_path
 # So the resource file doesn't trigger errors from code checkers (flake8)
 True if Draft_rc.__name__ else False
 
+# Parameter groups for preferences
+ADV_PARAM_GROUP = "User parameter:BaseApp/Preferences/Mod/AdvancedShapestring"
 
 class SpacedShapeStringTaskPanel:
     """Base class for Draft_SpacedShapeString task panel."""
@@ -102,9 +104,23 @@ class SpacedShapeStringTaskPanel:
         self.form.sbOffset.setProperty("unit", unit_length)
         self.form.cbUseBoundingBox.setChecked(bool(use_bounding_box))
 
+        # Platform dialog setup
         self.platWinDialog("Overwrite")
 
-        self.fileSpec = font if font else get_param("FontFile")
+        # Parameter groups
+        self._adv_params = App.ParamGet(ADV_PARAM_GROUP)
+
+        # Font file: AdvancedShapestring default → Draft default → explicit arg → empty
+        if font:
+            self.fileSpec = font
+        else:
+            adv_font = self._adv_params.GetString("FontFile", "")
+            if adv_font:
+                self.fileSpec = adv_font
+            else:
+                # Use existing Draft preference helper as final fallback
+                self.fileSpec = get_param("FontFile") or ""
+
         self.form.fcFontFile.setFileName(self.fileSpec)
 
         self.point = point
@@ -141,8 +157,14 @@ class SpacedShapeStringTaskPanel:
         )
 
     def fileSelect(self, fn):
-        """Assign the selected file."""
+        """Assign the selected file and remember it as default for AdvancedShapestring."""
         self.fileSpec = fn
+        # Ensure parameter group exists
+        if not hasattr(self, "_adv_params"):
+            self._adv_params = App.ParamGet(ADV_PARAM_GROUP)
+        # Store last-used font as mod preference
+        self._adv_params.SetString("FontFile", str(fn))
+
 
     def resetPoint(self):
         """Reset the selected point."""
@@ -236,6 +258,11 @@ class SpacedShapeStringTaskPanelCmd(SpacedShapeStringTaskPanel):
 
     def accept(self):
         """Execute when clicking the OK button."""
+        # Persist font used in this operation as AdvancedShapestring default
+        if not hasattr(self, "_adv_params"):
+            self._adv_params = App.ParamGet(ADV_PARAM_GROUP)
+        self._adv_params.SetString("FontFile", str(self.fileSpec))
+
         self.createObject()
         self.reject()
         return True
@@ -351,6 +378,11 @@ class SpacedShapeStringTaskPanelEdit(SpacedShapeStringTaskPanel):
         Gui.doCommand(o + ".UseBoundingBox=" + str(use_bounding_box))
         Gui.doCommand(o + '.FontFile="' + font_file + '"')
         Gui.doCommand("FreeCAD.ActiveDocument.recompute()")
+
+        # Persist font used in edit as AdvancedShapestring default
+        if not hasattr(self, "_adv_params"):
+            self._adv_params = App.ParamGet(ADV_PARAM_GROUP)
+        self._adv_params.SetString("FontFile", str(font_file))
 
         self.reject()
         return True
