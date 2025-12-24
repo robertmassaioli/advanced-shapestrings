@@ -4,21 +4,31 @@
 AdvancedShapestrings adds a new FreeCAD workbench with additional, or improved, Shapestring commands.
 ## SpacedShapeString — what it is and why use it
 
+Icon: 
+
 ![SpacedShapeString icon](./freecad/advanced_shapestrings/resources/icons/Draft_SpacedShapeString.svg)
 
-- The SpacedShapeString object renders each string using a chosen font and arranges strings horizontally with configurable spacing (offset) or with spacing derived from each string's bounding box width.
-- Use it when you need text as true geometry (not annotations), so you can extrude, fillet, boolean-subtract, or otherwise operate on the letters as solids or faces.
-- Properties of the created object include:
+### What the command does
+
+A way to ensure that different strings are relatively offset from eachother.
+
+The SpacedShapeString object renders one or more strings using a chosen font and arranges strings horizontally with configurable spacing (offset) or with spacing derived from each string's bounding box width.
+
+Resulting shapes are standard FreeCAD objects and can be used in Part/PartDesign workflows.
+
+### Properties
+
   - `Strings` (list of string lines)
   - `FontFile` (path to .ttf/.otf)
   - `Size` (font size)
   - `Offset` (spacing between strings)
-  - `UseBoundingBox` (bool — derive spacing from bounding boxes)
-- Resulting shapes are standard FreeCAD objects and can be used in Part/PartDesign workflows.
+  - `UseBoundingBox` 
+    - False => Each String starts at a consistent offset from the last string
+    - True = The gap between strings is always a constant `Offset`, instead of  the distance between the strings themselves.
 
 ## Using the tool (GUI)
-1. Switch to the Draft workbench.
-2. Choose the "Spaced shape from text" tool (icon: Spaced shape from text).
+1. Switch to the Advanced Shapestrings workbench.
+2. Choose the "Spaced shape from text" tool (![SpacedShapeString icon](./freecad/advanced_shapestrings/resources/icons/Draft_SpacedShapeString.svg){width=8px height=8px}).
 3. In the task panel:
    - Add, edit or remove strings.
    - Select a font file.
