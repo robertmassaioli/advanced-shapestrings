@@ -8,6 +8,10 @@ Icon:
 
 ![SpacedShapeString icon](./freecad/advanced_shapestrings/resources/icons/AdvancedShapestrings_SpacedShapeString.svg)
 
+### Screenshot
+
+![Spaced Shape String Screenshot](./docs/screenshots/spaced-shapestring-example.png)
+
 ### What the Command Does
 
 The **SpacedShapeString** command lets you create several text strings—like numbers or labels—and place them in a line with even spacing between each one. The offset you choose always applies, either setting where each string starts relative to the last, or keeping the visible gap between strings constant.

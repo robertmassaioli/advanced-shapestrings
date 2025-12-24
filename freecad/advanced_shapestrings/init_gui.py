@@ -49,7 +49,7 @@ class AdvancedShapestrings(Gui.Workbench):
 
         _msg(translate(
             "Log",
-            "Switching to advanced_shapestrings") + "\n"))
+            "Switching to advanced_shapestrings") + "\n")
 
         # NOTE: Context for this commands must be "Workbench"
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Tools"), self.toolbox)
