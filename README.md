@@ -28,7 +28,9 @@ Resulting shapes are standard FreeCAD objects and can be used in Part/PartDesign
 
 ## Using the tool (GUI)
 1. Switch to the Advanced Shapestrings workbench.
-2. Choose the "Spaced shape from text" tool (![SpacedShapeString icon](./freecad/advanced_shapestrings/resources/icons/Draft_SpacedShapeString.svg){width=8px height=8px}).
+2. Choose the "Spaced shape from text" tool (<img src="./freecad/advanced_shapestrings/resources/icons/Draft_SpacedShapeString.svg"
+     alt="SpacedShapeString icon"
+     width="20" height="20">).
 3. In the task panel:
    - Add, edit or remove strings.
    - Select a font file.
