@@ -65,13 +65,13 @@ class SpacedShapeString(gui_base_original.Creator):
     def GetResources(self):
         """Set icon, menu and tooltip."""
         d = {
-            'Pixmap': get_icon_path("Draft_SpacedShapeString.svg"),
+            'Pixmap': get_icon_path("AdvancedShapestrings_SpacedShapeString.svg"),
             'MenuText': QT_TRANSLATE_NOOP(
-                "Draft_SpacedShapeString",
+                "AdvancedShapestrings_SpacedShapeString",
                 "Spaced shape from text"
             ),
             'ToolTip': QT_TRANSLATE_NOOP(
-                "Draft_SpacedShapeString",
+                "AdvancedShapestrings_SpacedShapeString",
                 "Creates a shape from a list of text strings with configurable spacing "
                 "by choosing a specific font and a placement.\n"
                 "The closed shapes can be used for extrusions and boolean operations."
@@ -101,7 +101,7 @@ class SpacedShapeString(gui_base_original.Creator):
             self.ui = Gui.draftToolBar
         super().finish()
 
-Gui.addCommand('Draft_SpacedShapeString', SpacedShapeString())
+Gui.addCommand('AdvancedShapestrings_SpacedShapeString', SpacedShapeString())
 
 
 ## @}

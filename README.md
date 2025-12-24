@@ -6,25 +6,34 @@ AdvancedShapestrings adds a new FreeCAD workbench with additional, or improved, 
 
 Icon: 
 
-![SpacedShapeString icon](./freecad/advanced_shapestrings/resources/icons/Draft_SpacedShapeString.svg)
+![SpacedShapeString icon](./freecad/advanced_shapestrings/resources/icons/AdvancedShapestrings_SpacedShapeString.svg)
 
-### What the command does
+### What the Command Does
 
-A way to ensure that different strings are relatively offset from eachother.
+The **SpacedShapeString** command lets you create several text strings—like numbers or labels—and place them in a line with even spacing between each one. The offset you choose always applies, either setting where each string starts relative to the last, or keeping the visible gap between strings constant.
 
-The SpacedShapeString object renders one or more strings using a chosen font and arranges strings horizontally with configurable spacing (offset) or with spacing derived from each string's bounding box width.
+For example, if you want to display numbers 1 through 11 across a face for a Pad, you’d usually need to create and position each number separately with the **Draft ShapeString** command. With **SpacedShapeString**, that same pattern can be done in one easy step.
 
-Resulting shapes are standard FreeCAD objects and can be used in Part/PartDesign workflows.
+The resulting shapes are standard FreeCAD objects that work seamlessly with both **Part** and **PartDesign** tools.
 
 ### Properties
 
-  - `Strings` (list of string lines)
-  - `FontFile` (path to .ttf/.otf)
-  - `Size` (font size)
-  - `Offset` (spacing between strings)
-  - `UseBoundingBox` 
-    - False => Each String starts at a consistent offset from the last string
-    - True = The gap between strings is always a constant `Offset`, instead of  the distance between the strings themselves.
+- **Strings**  
+  List of text entries to render, in order, as separate strings.
+
+- **FontFile**  
+  Path to the font file to use (for example, a `.ttf` or `.otf` file).
+
+- **Size**  
+  Height of the rendered text, in model units (the same meaning as the Size property of a standard Draft ShapeString).
+
+- **Offset**  
+  Horizontal spacing value applied between strings. This value is always used when positioning each subsequent string.
+
+- **UseBoundingBox**  
+  Controls how the offset is interpreted when laying out the strings:
+  - **False**: Each string’s insertion point is placed at a fixed offset from the previous string’s insertion point, regardless of character widths.  
+  - **True**: The visible gap between the end of one string and the start of the next is kept equal to the offset, using each string’s bounding box to measure its width.
 
 ## Using the tool (GUI)
 1. Switch to the Advanced Shapestrings workbench.

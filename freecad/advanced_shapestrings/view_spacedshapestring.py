@@ -36,7 +36,7 @@ class ViewProviderSpacedShapeString(ViewProviderDraft):
         vobj.Proxy = self
 
     def getIcon(self):
-        return get_icon_path("Draft_SpacedShapeString.svg")
+        return get_icon_path("AdvancedShapestrings_SpacedShapeString.svg")
     
     def updateData(self, obj, prop):
         if (prop == "Strings" or

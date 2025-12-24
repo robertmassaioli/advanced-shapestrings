@@ -54,7 +54,7 @@ True if Draft_rc.__name__ else False
 ADV_PARAM_GROUP = "User parameter:BaseApp/Preferences/Mod/AdvancedShapestring"
 
 class SpacedShapeStringTaskPanel:
-    """Base class for Draft_SpacedShapeString task panel."""
+    """Base class for AdvancedShapestrings_SpacedShapeString task panel."""
 
     def __init__(self,
                  point=App.Vector(0, 0, 0),
@@ -71,7 +71,7 @@ class SpacedShapeStringTaskPanel:
         self.form = Gui.PySideUic.loadUi(get_ui_path("TaskSpacedShapeString.ui"))
         self.form.setObjectName("SpacedShapeStringTaskPanel")
         self.form.setWindowTitle(translate("draft", "SpacedShapeString"))
-        self.form.setWindowIcon(QtGui.QIcon(get_icon_path("Draft_SpacedShapeString.svg")))
+        self.form.setWindowIcon(QtGui.QIcon(get_icon_path("AdvancedShapestrings_SpacedShapeString.svg")))
 
         unit_length = App.Units.Quantity(0.0, App.Units.Length).getUserPreferred()[2]
 
@@ -260,7 +260,7 @@ class SpacedShapeStringTaskPanel:
 
 
 class SpacedShapeStringTaskPanelCmd(SpacedShapeStringTaskPanel):
-    """Task panel for Draft_SpacedShapeString."""
+    """Task panel for AdvancedShapestrings_SpacedShapeString."""
 
     def __init__(self, sourceCmd):
         super().__init__()
@@ -333,7 +333,7 @@ class SpacedShapeStringTaskPanelCmd(SpacedShapeStringTaskPanel):
             _msg("SpacedShapeString commit commands:\n" + "\n".join(commands))
             self.sourceCmd.commit(translate("draft", "Create SpacedShapeString"), commands)
         except Exception:
-            _err("Draft_SpacedShapeString: error delaying commit\n")
+            _err("AdvancedShapestrings_SpacedShapeString: error delaying commit\n")
             # Also print the full Python traceback to the console/log
             traceback.print_exc()
 

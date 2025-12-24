@@ -15,11 +15,11 @@ class AdvancedShapestrings(Gui.Workbench):
     """
     class which gets initiated at startup of the gui
     """
-    MenuText = translate("Workbench", "AdvancedShapestrings")
+    MenuText = translate("Workbench", "Advanced Shapestrings")
     ToolTip = translate("Workbench", "a simple AdvancedShapestrings")
     Icon = get_icon_path("Workbench.svg")
     toolbox = [
-        "Draft_SpacedShapeString",  # SpacedShapeString
+        "AdvancedShapestrings_SpacedShapeString",  # SpacedShapeString
     ]
 
     def GetClassName(self):
