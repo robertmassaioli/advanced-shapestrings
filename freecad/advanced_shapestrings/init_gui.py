@@ -19,6 +19,7 @@ class AdvancedShapestrings(Gui.Workbench):
     Icon = get_icon_path("Workbench.svg")
     toolbox = [
         "AdvancedShapestrings_SpacedShapeString",  # SpacedShapeString
+        "AdvancedShapestrings_RadialShapeString",  # RadialShapeString
     ]
 
     def GetClassName(self):
