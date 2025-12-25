@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>580</height>
+    <height>640</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -100,9 +100,6 @@ Uncheck to use working plane coordinate system</string>
        <property name="toolTip">
         <string>Resets the picked center point</string>
        </property>
-       <property name="statusTip">
-        <string/>
-       </property>
        <property name="text">
         <string>Reset Center</string>
        </property>
@@ -139,6 +136,7 @@ Uncheck to use working plane coordinate system</string>
    <item row="1" column="0">
     <layout class="QGridLayout" name="gridLayout_6">
 
+     <!-- Strings label + list -->
      <item row="0" column="0">
       <widget class="QLabel" name="labelStrings">
        <property name="text">
@@ -174,7 +172,7 @@ Uncheck to use working plane coordinate system</string>
       </layout>
      </item>
 
-     <!-- RADIUS moved here, above Start angle -->
+     <!-- Radius -->
      <item row="2" column="0">
       <widget class="QLabel" name="labelRadius">
        <property name="text">
@@ -199,6 +197,7 @@ Uncheck to use working plane coordinate system</string>
       </widget>
      </item>
 
+     <!-- Start angle -->
      <item row="3" column="0">
       <widget class="QLabel" name="labelStartAngle">
        <property name="text">
@@ -226,6 +225,7 @@ Uncheck to use working plane coordinate system</string>
       </widget>
      </item>
 
+     <!-- Angle step -->
      <item row="4" column="0">
       <widget class="QLabel" name="labelAngleStep">
        <property name="text">
@@ -242,7 +242,7 @@ Uncheck to use working plane coordinate system</string>
         <string notr="true">deg</string>
        </property>
        <property name="minimum">
-        <double>0.000000000000000</double>
+        <double>0.100000000000000</double>
        </property>
        <property name="maximum">
         <double>360.000000000000000</double>
@@ -253,7 +253,34 @@ Uncheck to use working plane coordinate system</string>
       </widget>
      </item>
 
-     <item row="5" column="0" colspan="2">
+     <!-- Rotation direction directly under Angle step -->
+     <item row="5" column="0">
+      <widget class="QLabel" name="labelRotationDirection">
+       <property name="text">
+        <string>Rotation direction</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QComboBox" name="cbRotationDirection">
+       <property name="toolTip">
+        <string>Direction to step angles when placing strings</string>
+       </property>
+       <item>
+        <property name="text">
+         <string>CounterClockwise</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Clockwise</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+
+     <!-- Tangential -->
+     <item row="6" column="0" colspan="2">
       <widget class="QCheckBox" name="cbTangential">
        <property name="toolTip">
         <string>Rotate each string so its baseline is tangent to the arc.
@@ -268,14 +295,43 @@ Uncheck to keep text baseline parallel to the X axis.</string>
       </widget>
      </item>
 
-     <item row="6" column="0">
+     <!-- String rotation moved under Tangential -->
+     <item row="7" column="0">
+      <widget class="QLabel" name="labelStringRotation">
+       <property name="text">
+        <string>String rotation</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="Gui::QuantitySpinBox" name="sbStringRotation">
+       <property name="toolTip">
+        <string>Extra rotation angle applied uniformly to every string</string>
+       </property>
+       <property name="unit" stdset="0">
+        <string notr="true">deg</string>
+       </property>
+       <property name="minimum">
+        <double>-360.000000000000000</double>
+       </property>
+       <property name="maximum">
+        <double>360.000000000000000</double>
+       </property>
+       <property name="value">
+        <double>0.000000000000000</double>
+       </property>
+      </widget>
+     </item>
+
+     <!-- Font file -->
+     <item row="8" column="0">
       <widget class="QLabel" name="labelFontFile">
        <property name="text">
         <string>Font file</string>
        </property>
       </widget>
      </item>
-     <item row="6" column="1">
+     <item row="8" column="1">
       <widget class="Gui::FileChooser" name="fcFontFile">
        <property name="filter">
         <string>Font files (*.ttc *.ttf *.otf *.pfb *.TTC *.TTF *.OTF *.PFB)</string>

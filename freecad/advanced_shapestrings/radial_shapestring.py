@@ -115,7 +115,7 @@ class RadialShapeString(DraftObject):
                 "Bottom-Center",
                 "Bottom-Right",
             ]
-            obj.Justification = "Bottom-Left"
+            obj.Justification = "Middle-Center"
 
         if "JustificationReference" not in properties:
             _tip = QT_TRANSLATE_NOOP(
@@ -318,7 +318,7 @@ class RadialShapeString(DraftObject):
                 if obj.Tangential:
                     # Tangent direction pointing toward the center:
                     # radial angle + 180° is inward; minus 90° for baseline.
-                    rot_deg = angle_deg + 180.0 - 90.0
+                    rot_deg = angle_deg - 90.0
                 else:
                     # Baseline kept parallel to global X axis
                     rot_deg = 0.0
