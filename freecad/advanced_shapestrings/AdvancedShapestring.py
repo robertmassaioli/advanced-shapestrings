@@ -1,1 +1,1 @@
-from .make import make_spacedshapestring
+from .make_spacedshapestring import make_spacedshapestring
