@@ -41,31 +41,43 @@ The resulting shapes are standard FreeCAD objects that work seamlessly with both
   - **False**: Each string’s insertion point is placed at a fixed offset from the previous string’s insertion point, regardless of character widths.  
   - **True**: The visible gap between the end of one string and the start of the next is kept equal to the offset, using each string’s bounding box to measure its width.
 
+### SpacedShapeString – example use cases
+
+- **Slot numbering**  
+  Numbering individual slots, pockets, or cavities along a plate or rail so each feature has a clear index for assembly or inspection.  
+
+- **Serial ID rows**  
+  Creating a row of serial numbers or IDs on a nameplate, tag strip, or terminal block that will be engraved or embossed.  
+
+- **Connector edge labels**  
+  Laying out repeated text labels (e.g. “IN”, “OUT”, “GND”, “+5V”) along the edge of a PCB or electronics enclosure.  
+
+- **Process step markers**  
+  Generating dimension or step labels (“Step 1”, “Step 2”, …) along a process panel or jig to guide an operator.  
+
+- **Linear scale text**  
+  Producing evenly spaced text for ruler‑like scales, linear indicators, or calibration bars on a straight edge.  
+
+- **Decorative text bands**  
+  Creating decorative repeated words or phrases along a straight band that will later be wrapped or mapped onto a surface.  
 
 ## RadialShapeString — what it is and why use it
-
 
 Icon: 
 
 ![RadialShapeString icon](./freecad/advanced_shapestrings/resources/icons/AdvancedShapestrings_RadialShapeString.svg)
 
-
 ### Screenshot
-
 
 ![Radial Shape String Screenshot](./docs/screenshots/radial-shapestring-example.png)
 
-
 ### What the Command Does
-
 
 The **RadialShapeString** command lets you create several text strings—such as numbers for a dial or labels around a bolt circle—and place them on a circular arc around a common center point. You control the radius, starting angle, and angular step, so each string lands at a predictable polar position.
 
 Strings can be oriented tangentially to the circle (ideal for gauges and knobs) or kept horizontal for documentation‑style layouts. As with SpacedShapeString, the result is a regular FreeCAD shape object that works with **Part** and **PartDesign** operations for engraving or embossing.
 
-
 ### Properties
-
 
 - **Strings**  
   List of text entries to render, each placed at a different angle around the center.
@@ -94,6 +106,25 @@ Strings can be oriented tangentially to the circle (ideal for gauges and knobs) 
 - **StringRotation**  
   Extra rotation angle (in degrees) applied uniformly to every string, after tangential or horizontal alignment.
 
+### RadialShapeString – example use cases
+
+- **Dial face labels**  
+  Labeling gauge or dial faces (e.g. “0, 10, 20, …” or “LOW, NORM, HIGH”) around a circular pointer indicator.  
+
+- **Bolt‑circle notes**  
+  Adding bolt‑circle annotations (e.g. “8x M8”, “Ø10 THRU”) equally spaced around a flange or hub.  
+
+- **Compass / direction marks**  
+  Creating compass roses or directional markers (“N, NE, E, …”) on navigation instruments or panel graphics.  
+
+- **Rotary index positions**  
+  Marking positions around a rotary switch, indexing plate, or turret (e.g. “1–12”) for repeatable angle settings.  
+
+- **Knob legends**  
+  Designing radial legends around knobs, volume controls, or selector dials on audio and industrial equipment.  
+
+- **Circular badge text**  
+  Generating circular text for badges, coins, medallions, or ornamental rings where wording must follow a circle.
 
 ## Using the tools (GUI)
 
