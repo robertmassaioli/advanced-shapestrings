@@ -278,9 +278,3 @@ class SpacedShapeString(DraftObject):
                 pass
 
         return faces
-
-
-# Alias for compatibility
-_SpacedShapeString = SpacedShapeString
-
-## @}

@@ -388,5 +388,3 @@ class SpacedShapeStringTaskPanelEdit(SpacedShapeStringTaskPanel):
         Gui.Snapper.off()
         Gui.Control.closeDialog()
         return None
-
-## @}

@@ -462,5 +462,3 @@ class RadialShapeStringTaskPanelEdit(RadialShapeStringTaskPanel):
         Gui.Control.closeDialog()
         return None
 
-
-## @}

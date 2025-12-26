@@ -82,8 +82,3 @@ def make_spacedshapestring(Strings, FontFile, Size=100, Offset=10, UseBoundingBo
     App.Console.PrintMessage("SpacedShapeString object created successfully.\n")
     return obj
 
-
-makeSpacedShapeString = make_spacedshapestring
-
-
-## @}

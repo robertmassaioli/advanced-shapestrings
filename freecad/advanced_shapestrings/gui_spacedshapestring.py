@@ -100,6 +100,3 @@ class SpacedShapeString(gui_base_original.Creator):
 
 def registerSpaced():
     Gui.addCommand('ShapeStrings_Spaced', SpacedShapeString())
-
-
-## @}

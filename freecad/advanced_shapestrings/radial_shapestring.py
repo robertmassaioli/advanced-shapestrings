@@ -411,10 +411,3 @@ class RadialShapeString(DraftObject):
                 pass
 
         return faces_list
-
-
-# Alias for compatibility
-_RadialShapeString = RadialShapeString
-
-
-## @}

@@ -105,7 +105,3 @@ class RadialShapeString(gui_base_original.Creator):
 
 def registerRadial():
     Gui.addCommand('ShapeStrings_Radial', RadialShapeString())
-
-
-
-## @}

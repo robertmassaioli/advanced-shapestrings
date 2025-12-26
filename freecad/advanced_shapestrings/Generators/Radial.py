@@ -100,8 +100,3 @@ def make_radialshapestring(Strings,
     App.Console.PrintMessage("RadialShapeString object created successfully.\n")
     return obj
 
-
-makeRadialShapeString = make_radialshapestring
-
-
-## @}
