@@ -36,6 +36,7 @@ from draftutils.messages import _wrn, _msg, _toolmsg
 from draftutils.translate import translate
 
 from draftobjects.base import DraftObject
+from .justification import justification_vector
 
 
 class SpacedShapeString(DraftObject):
@@ -187,11 +188,13 @@ class SpacedShapeString(DraftObject):
                             App.Console.PrintWarning(wrn)
 
                     # Apply justification
-                    just_vec = self.justification_vector(ss_shape,
-                                                         cap_height,
-                                                         obj.Justification,
-                                                         obj.JustificationReference,
-                                                         obj.KeepLeftMargin)
+                    just_vec = justification_vector(
+                        ss_shape,
+                        cap_height,
+                        obj.Justification,
+                        obj.JustificationReference,
+                        obj.KeepLeftMargin,
+                    )
                     shapes = ss_shape.SubShapes
                     for shape in shapes:
                         shape.translate(just_vec)
@@ -231,32 +234,7 @@ class SpacedShapeString(DraftObject):
     def onChanged(self, obj, prop):
         self.props_changed_store(prop)
 
-    def justification_vector(self, ss_shape, cap_height, just, just_ref, keep_left_margin):
-        """Calculate the justification offset vector."""
-        box = ss_shape.optimalBoundingBox()
-        if keep_left_margin is True and "Left" in just:
-            vec = App.Vector(0, 0, 0)
-        else:
-            vec = App.Vector(-box.XMin, 0, 0)  # remove left margin caused by kerning and white space
-
-        width = box.XLength
-        if "Shape" in just_ref:
-            vec = vec + App.Vector(0, -box.YMin, 0)
-            height = box.YLength
-        else:
-            height = cap_height
-
-        if "Top" in just:
-            vec = vec + App.Vector(0, -height, 0)
-        elif "Middle" in just:
-            vec = vec + App.Vector(0, -height/2, 0)
-
-        if "Right" in just:
-            vec = vec + App.Vector(-width, 0, 0)
-        elif "Center" in just:
-            vec = vec + App.Vector(-width/2, 0, 0)
-
-        return vec
+    # justification_vector moved to shared module `justification.py`
 
     def make_faces(self, wireChar):
         """Create faces from wire character representation."""
