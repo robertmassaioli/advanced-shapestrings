@@ -43,7 +43,6 @@ from draftutils.translate import translate
 from draftobjects.base import DraftObject
 from .justification import justification_vector
 
-
 class RadialShapeString(DraftObject):
     """The RadialShapeString object - renders multiple strings arranged on an arc."""
 

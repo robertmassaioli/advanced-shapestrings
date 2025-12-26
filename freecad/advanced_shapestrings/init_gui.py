@@ -5,6 +5,7 @@ import FreeCADGui as Gui
 import FreeCAD as App
 from draftutils.messages import _msg
 from .paths import get_icon_path, get_translation_directory
+from . import AdvancedShapestringTools
 
 # Fallback-safe translate helpers and toolbox entries (inlined from gui_common)
 try:
@@ -20,6 +21,11 @@ except Exception:
 
     def translate(context, text):
         return text
+    
+TOOLBOX = [
+    "AdvancedShapestrings_SpacedShapeString", 
+    "AdvancedShapestrings_RadialShapeString",
+]
 
 # Add translations path
 Gui.addLanguagePath(get_translation_directory())
@@ -32,10 +38,7 @@ class AdvancedShapestrings(Gui.Workbench):
     MenuText = translate("Workbench", "Shapestrings")
     ToolTip = translate("Workbench", "Many more Shapestring tools")
     Icon = get_icon_path("Workbench.svg")
-    toolbox = [
-        "AdvancedShapestrings_SpacedShapeString",
-        "AdvancedShapestrings_RadialShapeString",
-    ]
+    toolbox = TOOLBOX
 
     def GetClassName(self):
         return "Gui::PythonWorkbench"
@@ -56,7 +59,6 @@ class AdvancedShapestrings(Gui.Workbench):
                 Gui.Snapper = draftguitools.gui_snapper.Snapper()
             App.activeDraftCommand = None
 
-            from . import AdvancedShapestringTools
         except Exception as exc:
             App.Console.PrintError(exc)
             App.Console.PrintError("Error: Initializing one or more "
@@ -70,9 +72,6 @@ class AdvancedShapestrings(Gui.Workbench):
         # NOTE: Context for this commands must be "Workbench"
         self.appendToolbar(QT_TRANSLATE_NOOP("Workbench", "Shapestring Tools"), self.toolbox)
         self.appendMenu(QT_TRANSLATE_NOOP("Workbench", "Shapestring Tools"), self.toolbox)
-
-        # Ensure the Draft workbench receives our toolbar/menu
-        self.append_shapestrings_to_draft_workbench()
 
     def Activated(self):
         '''
@@ -94,8 +93,18 @@ class AdvancedShapestrings(Gui.Workbench):
         App.Console.PrintMessage(translate(
             "Log",
             "Workbench advanced_shapestrings de-activated.") + "\n")
-        
-    def append_shapestrings_to_draft_workbench(self):
+
+# Register the workbench class with FreeCAD
+Gui.addWorkbench(AdvancedShapestrings())
+
+def _on_workbench_activated():
+    wb = Gui.activeWorkbench()
+    # Ensure we have the Python wrapper, not just the C++ instance
+    if not hasattr(wb, "__Workbench__"):
+        return
+    # Only run when Draft is actually active
+    if wb.__class__.__name__ == "DraftWorkbench":
+        # Your one-time or repeatable hook here
         """Append Shapestrings toolbar and menu to the Draft workbench.
 
         This is designed to be safe to call at import time; it will no-op in
@@ -106,11 +115,11 @@ class AdvancedShapestrings(Gui.Workbench):
             if draft_wb:
                 draft_wb.appendToolbar(
                     QT_TRANSLATE_NOOP("Workbench", "Shapestrings"),
-                    self.toolbox,
+                    TOOLBOX,
                 )
                 draft_wb.appendMenu(
                     QT_TRANSLATE_NOOP("Workbench", "&Shapestrings"),
-                    self.toolbox,
+                    TOOLBOX,
                 )
                 _msg("Appended Shapestrings tools to Draft workbench\n")
         except Exception as exc:
@@ -122,6 +131,5 @@ class AdvancedShapestrings(Gui.Workbench):
                 # If App isn't available just ignore
                 pass
 
-# Register the workbench class with FreeCAD
-Gui.addWorkbench(AdvancedShapestrings())
-
+# Connect once (e.g. in your InitGui.py)
+Gui.getMainWindow().workbenchActivated.connect(_on_workbench_activated)
