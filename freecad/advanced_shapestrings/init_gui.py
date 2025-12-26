@@ -104,7 +104,6 @@ def _on_workbench_activated():
         return
     # Only run when Draft is actually active
     if wb.__class__.__name__ == "DraftWorkbench":
-        # Your one-time or repeatable hook here
         """Append Shapestrings toolbar and menu to the Draft workbench.
 
         This is designed to be safe to call at import time; it will no-op in
