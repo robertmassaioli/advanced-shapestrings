@@ -27,7 +27,7 @@
 import FreeCAD as App
 import draftutils.gui_utils as gui_utils
 
-from ..radial_shapestring import RadialShapeString
+from ..Objects import RadialShapeString
 
 if App.GuiUp:
     from ..Views import ViewProviderRadialShapeString

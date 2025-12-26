@@ -27,7 +27,7 @@
 import FreeCAD as App
 import draftutils.gui_utils as gui_utils
 
-from ..spaced_shapestring import SpacedShapeString
+from ..Objects import SpacedShapeString
 
 if App.GuiUp:
     from ..Views import ViewProviderSpacedShapeString
