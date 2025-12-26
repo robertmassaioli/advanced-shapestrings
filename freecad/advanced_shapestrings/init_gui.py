@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: LGPL-2.1-only
 # SPDX-FileNotice: Part of the ShapeStrings addon.
 
-from .AdvancedShapestringTools import registerCommands
+from .Commands import registerCommands
 from .paths import get_translation_directory
 
 from draftutils.messages import _msg
