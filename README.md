@@ -4,6 +4,10 @@
 
 AdvancedShapestrings adds a new FreeCAD workbench with additional, or improved, Shapestring commands.
 
+## Compatability
+
+This Workbench was developed against FreeCad version 1.0.2 and is designed to work with that version and all subsequent versions.
+
 ## SpacedShapeString — what it is and why use it
 
 Icon: 
