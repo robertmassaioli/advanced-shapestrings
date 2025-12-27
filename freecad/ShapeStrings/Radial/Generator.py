@@ -17,37 +17,45 @@
 #   See the GNU Lesser General Public License for more details.                #
 #                                                                              #
 #   You should have received a copy of the GNU Lesser General Public License   #
-#   along with this library; if not, write to the Free Software Foundation,    # 
+#   along with this library; if not, write to the Free Software Foundation,    #
 #   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA           #
 #                                                                              #
 ################################################################################
 
-"""Provides functions to create SpacedShapeString objects."""
-## @package make_shapestring
-# \ingroup draftmake
-# \brief Provides functions to create SpacedShapeString objects.
+"""Provides functions to create RadialShapeString objects."""
 
-
-## \addtogroup draftmake
-# @{
 import FreeCAD as App
 import draftutils.gui_utils as gui_utils
 
-from .spaced_shapestring import SpacedShapeString
+from .Object import RadialShapeString
 
 if App.GuiUp:
-    from .view_spacedshapestring import ViewProviderSpacedShapeString
+    from .View import ViewProviderRadialShapeString
 
 
-def make_spacedshapestring(Strings, FontFile, Size=100, Offset=10, UseBoundingBox=False):
-    """SpacedShapeString(Strings,FontFile,[Height],[Offset],[UseBoundingBox])
+def make_radialshapestring(Strings,
+                           FontFile,
+                           Size=100,
+                           Radius=50,
+                           StartAngle=0,
+                           AngleStep=30,
+                           Tangential=True,
+                           RotationDirection="CounterClockwise",
+                           StringRotation=0):
+    """RadialShapeString(Strings, FontFile,
+                         [Size], [Radius], [StartAngle], [AngleStep], [Tangential])
 
     Turns a list of text strings into a single Compound Shape, with each
-    string rendered using the given font and separated in the x-direction
-    by the specified offset (and optionally using each string's bounding
-    box width to compute spacing).
+    string rendered using the given font and placed on an arc of radius
+    `Radius` at angles:
+
+        angle_i = StartAngle + i * AngleStep
+
+    If `Tangential` is True, each string’s baseline is rotated to be
+    tangent to the arc at its position; otherwise the baseline stays
+    parallel to the global X axis.
     """
-    App.Console.PrintMessage("Creating SpacedShapeString object...\n")
+    App.Console.PrintMessage("Creating RadialShapeString object...\n")
 
     if not App.ActiveDocument:
         App.Console.PrintError("No active document. Aborting\n")
@@ -55,18 +63,23 @@ def make_spacedshapestring(Strings, FontFile, Size=100, Offset=10, UseBoundingBo
 
     obj = App.ActiveDocument.addObject(
         "Part::Part2DObjectPython",
-        "SpacedShapeString"
+        "RadialShapeString"
     )
-    SpacedShapeString(obj)
-    # Core spaced properties
+    RadialShapeString(obj)
+
+    # Core radial properties
     obj.Strings = list(Strings)
     obj.FontFile = FontFile
     obj.Size = Size
-    obj.Offset = Offset
-    obj.UseBoundingBox = bool(UseBoundingBox)
+    obj.Radius = Radius
+    obj.StartAngle = StartAngle
+    obj.AngleStep = AngleStep
+    obj.Tangential = bool(Tangential)
+    obj.RotationDirection = str(RotationDirection)
+    obj.StringRotation = StringRotation
 
     # Print all object properties to the FreeCAD console
-    App.Console.PrintMessage("SpacedShapeString properties:\n")
+    App.Console.PrintMessage("RadialShapeString properties:\n")
     for prop in obj.PropertiesList:
         try:
             val = getattr(obj, prop)
@@ -74,22 +87,16 @@ def make_spacedshapestring(Strings, FontFile, Size=100, Offset=10, UseBoundingBo
             val = "<unreadable: {}>".format(e)
         App.Console.PrintMessage("  {} = {}\n".format(prop, val))
 
-
     if App.GuiUp:
-        ViewProviderSpacedShapeString(obj.ViewObject)
+        ViewProviderRadialShapeString(obj.ViewObject)
         gui_utils.format_object(obj)
         obrep = obj.ViewObject
         if "PointSize" in obrep.PropertiesList:
             obrep.PointSize = 1
         gui_utils.select(obj)
-        
+
     obj.recompute()
 
-    App.Console.PrintMessage("SpacedShapeString object created successfully.\n")
+    App.Console.PrintMessage("RadialShapeString object created successfully.\n")
     return obj
 
-
-makeSpacedShapeString = make_spacedshapestring
-
-
-## @}

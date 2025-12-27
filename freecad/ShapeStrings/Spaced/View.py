@@ -17,7 +17,7 @@
 #   See the GNU Lesser General Public License for more details.                #
 #                                                                              #
 #   You should have received a copy of the GNU Lesser General Public License   #
-#   along with this library; if not, write to the Free Software Foundation,    # 
+#   along with this library; if not, write to the Free Software Foundation,    #
 #   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA           #
 #                                                                              #
 ################################################################################
@@ -28,8 +28,8 @@
 import FreeCADGui as Gui
 
 from draftviewproviders.view_base import ViewProviderDraft
-from .task_spacedshapestring import SpacedShapeStringTaskPanelEdit
-from .paths import get_icon_path
+from ..Misc.Resources import asIcon
+from .Dialog import SpacedShapeStringTaskPanelEdit
 
 class ViewProviderSpacedShapeString(ViewProviderDraft):
 
@@ -37,8 +37,8 @@ class ViewProviderSpacedShapeString(ViewProviderDraft):
         vobj.Proxy = self
 
     def getIcon(self):
-        return get_icon_path("AdvancedShapestrings_SpacedShapeString.svg")
-    
+        return asIcon('Spaced')
+
     def updateData(self, obj, prop):
         if (prop == "Strings" or
             prop == "FontFile" or
@@ -46,7 +46,7 @@ class ViewProviderSpacedShapeString(ViewProviderDraft):
             prop == "Offset" or
             prop == "UseBoundingBox"):
             obj.recompute()
-        
+
         return
 
     def setEdit(self, vobj, mode):

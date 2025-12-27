@@ -10,7 +10,7 @@
 
     <!--[ Versions ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
-    <freecadmin>0.20.0</freecadmin>
+    <freecadmin>1.0.2</freecadmin>
     <version>0.1.0</version>
     <date>2025-12-24</date>
 
@@ -44,7 +44,7 @@
 
     <!--[ Icon ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
-    <icon>freecad/advanced_shapestrings/resources/icons/Workbench.svg</icon>
+    <icon>freecad/ShapeStrings/Resources/Icons/Logo.svg</icon>
 
     <!--[ Urls ]―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
@@ -68,10 +68,7 @@
     <!--[ Content ]――――――――――――――――――――――――――――――――――――――――――――――――――――――――――-->
 
     <content>
-        <workbench>
-            <subdirectory>.</subdirectory>
-            <classname>AdvancedShapestrings</classname>
-        </workbench>
+        <other/>
     </content>
 
 </package>

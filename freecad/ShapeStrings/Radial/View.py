@@ -17,7 +17,7 @@
 #   See the GNU Lesser General Public License for more details.                #
 #                                                                              #
 #   You should have received a copy of the GNU Lesser General Public License   #
-#   along with this library; if not, write to the Free Software Foundation,    # 
+#   along with this library; if not, write to the Free Software Foundation,    #
 #   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA           #
 #                                                                              #
 ################################################################################
@@ -29,8 +29,8 @@
 import FreeCADGui as Gui
 
 from draftviewproviders.view_base import ViewProviderDraft
-from .task_radialshapestring import RadialShapeStringTaskPanelEdit
-from .paths import get_icon_path
+from ..Misc.Resources import asIcon
+from .Dialog import RadialShapeStringTaskPanelEdit
 
 
 class ViewProviderRadialShapeString(ViewProviderDraft):
@@ -39,7 +39,7 @@ class ViewProviderRadialShapeString(ViewProviderDraft):
         vobj.Proxy = self
 
     def getIcon(self):
-        return get_icon_path("AdvancedShapestrings_RadialShapeString.svg")
+        return asIcon('Radial')
 
     def updateData(self, obj, prop):
         if (
@@ -50,8 +50,8 @@ class ViewProviderRadialShapeString(ViewProviderDraft):
             or prop == "StartAngle"
             or prop == "AngleStep"
             or prop == "Tangential"
-            or prop == "RotationDirection"  
-            or prop == "StringRotation"      
+            or prop == "RotationDirection"
+            or prop == "StringRotation"
         ):
             obj.recompute()
         return

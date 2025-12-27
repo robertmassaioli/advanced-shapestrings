@@ -17,31 +17,28 @@
 #   See the GNU Lesser General Public License for more details.                #
 #                                                                              #
 #   You should have received a copy of the GNU Lesser General Public License   #
-#   along with this library; if not, write to the Free Software Foundation,    # 
+#   along with this library; if not, write to the Free Software Foundation,    #
 #   Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA           #
 #                                                                              #
 ################################################################################
 
 """Provides the object code for the RadialShapeString object."""
-## @package radial_shapestring
-# \ingroup draftobjects
-# \brief Provides the object code for the RadialShapeString object.
 
-
-## \addtogroup draftobjects
-# @{
 import math
-from PySide.QtCore import QT_TRANSLATE_NOOP
 
 import FreeCAD as App
 import Part
 
 from draftgeoutils import faces
-from draftutils.messages import _wrn, _msg, _toolmsg
-from draftutils.translate import translate
+from draftutils.messages import _wrn
 
 from draftobjects.base import DraftObject
-from .justification import justification_vector
+from ..Misc.Justify import justification_vector
+
+from FreeCAD import Qt
+
+translate = Qt.translate
+
 
 class RadialShapeString(DraftObject):
     """The RadialShapeString object - renders multiple strings arranged on an arc."""
@@ -55,14 +52,14 @@ class RadialShapeString(DraftObject):
         properties = obj.PropertiesList
 
         if "Strings" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "List of text strings to render around the center point",
             )
             obj.addProperty("App::PropertyStringList", "Strings", "Draft", _tip)
 
         if "Radius" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Distance from center to text baseline",
             )
@@ -70,7 +67,7 @@ class RadialShapeString(DraftObject):
             obj.Radius = 50.0
 
         if "StartAngle" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Starting angle for the first string (0° = +X axis)",
             )
@@ -78,7 +75,7 @@ class RadialShapeString(DraftObject):
             obj.StartAngle = 0.0
 
         if "AngleStep" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Angular increment between successive strings",
             )
@@ -86,7 +83,7 @@ class RadialShapeString(DraftObject):
             obj.AngleStep = 30.0
 
         if "Tangential" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Rotate each string so its baseline is tangent to the arc. "
                 "Uncheck to keep text baseline parallel to the X axis.",
@@ -95,15 +92,15 @@ class RadialShapeString(DraftObject):
             obj.Tangential = True
 
         if "FontFile" not in properties:
-            _tip = QT_TRANSLATE_NOOP("App::Property", "Font file name")
+            _tip = translate("App::Property", "Font file name")
             obj.addProperty("App::PropertyFile", "FontFile", "Draft", _tip)
 
         if "Size" not in properties:
-            _tip = QT_TRANSLATE_NOOP("App::Property", "Height of text")
+            _tip = translate("App::Property", "Height of text")
             obj.addProperty("App::PropertyLength", "Size", "Draft", _tip)
 
         if "Justification" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Horizontal and vertical alignment",
             )
@@ -122,7 +119,7 @@ class RadialShapeString(DraftObject):
             obj.Justification = "Middle-Center"
 
         if "JustificationReference" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Height reference used for justification",
             )
@@ -136,7 +133,7 @@ class RadialShapeString(DraftObject):
             obj.JustificationReference = "Cap Height"
 
         if "KeepLeftMargin" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Keep left margin and leading white space when justification is left",
             )
@@ -144,7 +141,7 @@ class RadialShapeString(DraftObject):
             obj.KeepLeftMargin = False
 
         if "ScaleToSize" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Scale to ensure cap height is equal to size",
             )
@@ -152,20 +149,20 @@ class RadialShapeString(DraftObject):
             obj.ScaleToSize = True
 
         if "Tracking" not in properties:
-            _tip = QT_TRANSLATE_NOOP("App::Property", "Inter-character spacing")
+            _tip = translate("App::Property", "Inter-character spacing")
             obj.addProperty("App::PropertyDistance", "Tracking", "Draft", _tip)
 
         if "ObliqueAngle" not in properties:
-            _tip = QT_TRANSLATE_NOOP("App::Property", "Oblique (slant) angle")
+            _tip = translate("App::Property", "Oblique (slant) angle")
             obj.addProperty("App::PropertyAngle", "ObliqueAngle", "Draft", _tip)
 
         if "MakeFace" not in properties:
-            _tip = QT_TRANSLATE_NOOP("App::Property", "Fill letters with faces")
+            _tip = translate("App::Property", "Fill letters with faces")
             obj.addProperty("App::PropertyBool", "MakeFace", "Draft", _tip)
             obj.MakeFace = True
 
         if "Fuse" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Fuse faces if faces overlap, usually not required (can be very slow)",
             )
@@ -173,7 +170,7 @@ class RadialShapeString(DraftObject):
             obj.Fuse = False
 
         if "RotationDirection" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Direction to step angles when placing strings",
             )
@@ -187,7 +184,7 @@ class RadialShapeString(DraftObject):
             obj.RotationDirection = "CounterClockwise"
 
         if "StringRotation" not in properties:
-            _tip = QT_TRANSLATE_NOOP(
+            _tip = translate(
                 "App::Property",
                 "Extra rotation angle applied uniformly to every string",
             )
@@ -414,10 +411,3 @@ class RadialShapeString(DraftObject):
                 pass
 
         return faces_list
-
-
-# Alias for compatibility
-_RadialShapeString = RadialShapeString
-
-
-## @}
